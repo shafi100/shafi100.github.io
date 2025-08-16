@@ -4,12 +4,12 @@
 - [Fun & Freelancing Projects](#personal--freelance-projects)
 
 ### Projects at Job
-- [TestReach](testreach.com)
+- [TestReach](https://testreach.com)
 
   One of the leading assessment platform in the present world. Working on it as a senior software engineer
   SaaS business model
 
-- [Doctor Dekhao](doctordekhao.com)
+- [Doctor Dekhao](https://doctordekhao.com)
 
   A telemedicine solution enabling patients to find and connect with doctors through video calls.
 
@@ -19,7 +19,7 @@
 
   Lead the development team for a period of time.
 
-- [Hida.travel](hida.travel)
+- [Hida.travel](https://hida.travel)
 
   Tourism information blog for the **Hida** prefecture of Japan. Supports multiple languages
 
@@ -27,7 +27,7 @@
 
   Lead developer
 
-- [Ota.com](ota.com)
+- [Ota.com](https://ota.com)
 
   Tourism information blog for the **Ota** prefecture of Tokyo, Japan. Supports multiple languages
 
@@ -48,7 +48,7 @@
   Your role/core contribution. -->
 
 
-- [DuPlate](duplate.com)
+- [DuPlate](https://duplate.com)
 
   A end-to-end solution for restautrants including ingredient purchase planning, inventory management to home delivery.
 
@@ -58,7 +58,7 @@
 
   Lead developer, architect, cloud maintainer.
 
-- [DuWholesale](duwholesale.com)
+- [DuWholesale](https://duwholesale.com)
 
   A end-to-end solution for wholesale including ingredient purchase planning, inventory management to home delivery. Offered by Durbin Labs Ltd.
   Lead developer, architect, cloud maintainer.
