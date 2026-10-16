@@ -27,6 +27,40 @@ export interface CaseStudy {
  * internal codenames — "DataLake", not the internal version name).
  */
 export const caseStudies: CaseStudy[] = [
+  // Team recovery leads — the people story is the one founders and hiring
+  // managers engage with first.
+  {
+    slug: 'team-recovery',
+    title: 'Team recovery: delivering the projects that had already failed',
+    subtitle:
+      'Joining as an engineering manager amid missed deadlines and lost confidence — and leaving the team delivering beyond its own expectations.',
+    company: 'Durbin Labs',
+    companyUrl: 'https://durbinlabs.com',
+    period: 'Aug 2021 — Dec 2021',
+    tags: ['Engineering management', 'Mentoring', 'Delivery'],
+    context:
+      'I joined Durbin Labs as an engineering manager during a difficult stretch: several customer projects had already missed their deadlines, customer relationships were at risk, and the engineering team had become demoralized — it had lost confidence in its own ability to deliver.',
+    problem:
+      'The visible problem was late projects. The actual problem was a team that had stopped believing its estimates, priorities that shifted without a clear owner, and technical blockers that nobody felt empowered to remove. Adding pressure would have made all of it worse.',
+    did: [
+      'Took ownership of the delayed customer projects and set practical delivery priorities — what ships, in what order, and why.',
+      'Removed technical blockers personally while staying hands-on: architecture, backend implementation, code reviews, AWS infrastructure, production troubleshooting.',
+      'Mentored engineers and deliberately handed them ownership, so recovery did not depend on me heroically holding every thread.',
+      'Rebuilt delivery processes around what the team could actually commit to.',
+    ],
+    result:
+      'Multiple previously missed projects were delivered within a relatively short period, customer trust was restored, and the team delivered beyond its own initial perception of its capability — which was the outcome that mattered most for everything that came after.',
+    metrics: [
+      { value: 'Multiple', label: 'missed projects delivered' },
+      { value: 'Hands-on', label: 'management: architecture, code, production' },
+      { value: 'Trust', label: 'restored with customers and within the team' },
+    ],
+    differently:
+      'I would formalize the sequencing and the stakeholder communication cadence much sooner. Recovery only started working once priorities were explicit and status was honest; doing that in week one instead of discovering it through iteration would have removed weeks of thrash.',
+    diagram: 'leadership',
+    diagramIntro:
+      'Leadership range, and the arc of the recovery:',
+  },
   {
     slug: 'reporting-platform',
     title: 'The reporting platform that removed an engineering bottleneck',
@@ -124,38 +158,6 @@ export const caseStudies: CaseStudy[] = [
     diagram: 'reliability',
     diagramIntro:
       'The failure model in one picture — fail, back off, recover:',
-  },
-  {
-    slug: 'team-recovery',
-    title: 'Team recovery: delivering the projects that had already failed',
-    subtitle:
-      'Joining as an engineering manager amid missed deadlines and lost confidence — and leaving the team delivering beyond its own expectations.',
-    company: 'Durbin Labs',
-    companyUrl: 'https://durbinlabs.com',
-    period: 'Aug 2021 — Dec 2021',
-    tags: ['Engineering management', 'Mentoring', 'Delivery'],
-    context:
-      'I joined Durbin Labs as an engineering manager during a difficult stretch: several customer projects had already missed their deadlines, customer relationships were at risk, and the engineering team had become demoralized — it had lost confidence in its own ability to deliver.',
-    problem:
-      'The visible problem was late projects. The actual problem was a team that had stopped believing its estimates, priorities that shifted without a clear owner, and technical blockers that nobody felt empowered to remove. Adding pressure would have made all of it worse.',
-    did: [
-      'Took ownership of the delayed customer projects and set practical delivery priorities — what ships, in what order, and why.',
-      'Removed technical blockers personally while staying hands-on: architecture, backend implementation, code reviews, AWS infrastructure, production troubleshooting.',
-      'Mentored engineers and deliberately handed them ownership, so recovery did not depend on me heroically holding every thread.',
-      'Rebuilt delivery processes around what the team could actually commit to.',
-    ],
-    result:
-      'Multiple previously missed projects were delivered within a relatively short period, customer trust was restored, and the team delivered beyond its own initial perception of its capability — which was the outcome that mattered most for everything that came after.',
-    metrics: [
-      { value: 'Multiple', label: 'missed projects delivered' },
-      { value: 'Hands-on', label: 'management: architecture, code, production' },
-      { value: 'Trust', label: 'restored with customers and within the team' },
-    ],
-    differently:
-      'I would formalize the sequencing and the stakeholder communication cadence much sooner. Recovery only started working once priorities were explicit and status was honest; doing that in week one instead of discovering it through iteration would have removed weeks of thrash.',
-    diagram: 'leadership',
-    diagramIntro:
-      'Leadership range, and the arc of the recovery:',
   },
 ];
 

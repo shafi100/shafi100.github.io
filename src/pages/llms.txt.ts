@@ -22,7 +22,7 @@ export async function GET({ site }) {
     '',
     '## Pages',
     `- [About](${base}/about/): career arc, the platform systems diagram, depth-tiered skills, engineering philosophy and education.`,
-    `- [Case studies](${base}/work/): four deep dives — reporting platform, DataLake ingestion, reliability, team recovery — each with context, problem, actions, results and a "what I would do differently" retrospective. Raw markdown: ${base}/work/<slug>.md`,
+    `- [Case studies](${base}/work/): four deep dives — team recovery, reporting platform, DataLake ingestion, reliability — each with context, problem, actions, results and a "what I would do differently" retrospective. Raw markdown: ${base}/work/<slug>.md`,
     `- [Résumé](${base}/cv/): printable résumé generated from the same source data as the site.`,
     `- [Products](${base}/products/): everything shipped — MyDokan (live, distributed privately, email for access), the AI-agent tooling (loop, portfolio MCP), open source and client platform work (TestReach, Doctor Dekhao, Hida.travel, Ota.com, DuPlate, DuWholesale).`,
     `- [Blog](${base}/blog/): technical articles. Raw markdown for each post: ${base}/blog/<slug>.md`,
