@@ -1,0 +1,129 @@
+---
+// Career arc: five stops with a scope-growth lane (personal-website-plan.md §3.2).
+const stops = [
+  {
+    period: '2013 — 17',
+    place: 'BUET',
+    detail: 'B.Sc. in CSE — internships, part-time and volunteer code while studying.',
+    scope: 'Implementer',
+    current: false,
+  },
+  {
+    period: '2017 — 20',
+    place: 'Durbin Labs',
+    detail: 'Software Engineer — commercial SaaS across healthcare, education and restaurants.',
+    scope: 'Implementer → project lead (restaurant SaaS, team of 5)',
+    current: false,
+  },
+  {
+    period: '2020 — 21',
+    place: 'Japan Travel',
+    detail: 'Full-stack engineer — Laravel, Vue and the 100/100 Lighthouse challenge.',
+    scope: 'Full-stack engineer',
+    current: false,
+  },
+  {
+    period: '2021',
+    place: 'Durbin Labs · EM',
+    detail: 'Engineering manager — recovered the missed projects, rebuilt the team.',
+    scope: 'Engineering manager',
+    current: false,
+  },
+  {
+    period: '2022 — now',
+    place: 'TestReach',
+    detail: 'Senior Software Engineer — reporting, data ingestion and reliability platform work.',
+    scope: 'Dev lead → platform authority',
+    current: true,
+  },
+];
+---
+
+<section aria-label="Career timeline">
+  <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">The arc</h2>
+  <p class="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
+    About ten years building software — roughly four of them leading engineers, the rest
+    building the systems that leadership is accountable for.
+  </p>
+  <ol class="career mt-8 grid gap-10 sm:grid-cols-5 sm:gap-5">
+    {
+      // reverse-chronological — most recent on the left (top on mobile), like a résumé
+      [...stops].reverse().map((stop) => (
+        <li class:list={['stop relative', stop.current && 'is-current']}>
+          <span class="dot absolute h-3 w-3 rounded-full" aria-hidden="true" />
+          <time class="block font-mono text-xs text-zinc-500 dark:text-zinc-400">{stop.period}</time>
+          <h3 class="mt-2 font-semibold text-zinc-900 dark:text-zinc-100">{stop.place}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{stop.detail}</p>
+          <p class="mt-2 text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+            {stop.scope}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="mt-6 text-sm text-zinc-500 dark:text-zinc-500">
+    MyDokan, my own product, runs in parallel as an independent track — see{" "}
+    <a href="/products/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">Products</a>.
+  </p>
+</section>
+
+<style>
+  .career {
+    --rail: var(--color-zinc-300);
+    --dot: var(--color-zinc-400);
+  }
+  :global(.dark) .career {
+    --rail: var(--color-zinc-700);
+    --dot: var(--color-zinc-500);
+  }
+  /* mobile: vertical rail */
+  .stop {
+    padding-left: 1.75rem;
+  }
+  .stop .dot {
+    top: 0.25rem;
+    left: 0;
+    background: var(--dot);
+  }
+  .stop::before {
+    content: '';
+    position: absolute;
+    left: 0.3125rem;
+    top: 1.375rem;
+    bottom: -2.5rem;
+    width: 2px;
+    background: var(--rail);
+  }
+  .stop:last-child::before {
+    display: none;
+  }
+  /* sm and up: horizontal rail */
+  @media (min-width: 640px) {
+    .stop {
+      padding-left: 0;
+      padding-top: 2rem;
+    }
+    .stop .dot {
+      top: 0;
+      left: 0;
+    }
+    .stop::before {
+      left: 1.375rem;
+      right: -1.25rem;
+      top: 0.3125rem;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+    }
+    .stop:last-child::before {
+      display: none;
+    }
+  }
+  .stop.is-current .dot {
+    background: var(--color-blue-600);
+    box-shadow: 0 0 0 4px rgb(37 99 235 / 0.18);
+  }
+  :global(.dark) .stop.is-current .dot {
+    background: var(--color-blue-400);
+  }
+</style>

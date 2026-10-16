@@ -1,0 +1,20 @@
+name: Lighthouse
+
+# The site claims 100/100 Lighthouse — this gate fails the build if any of the
+# four categories drops below it (personal-website-plan.md §5).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v3
+      - name: Run Lighthouse CI against the static build
+        run: npx --yes @lhci/cli@0.14 autorun

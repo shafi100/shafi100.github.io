@@ -1,0 +1,59 @@
+# https://shafi.me — AI crawlers are welcome.
+# Search engines and LLM/assistant crawlers are explicitly allowed.
+Sitemap: https://shafi.me/sitemap-index.xml
+
+User-agent: *
+Allow: /
+
+# OpenAI (training, search, ChatGPT browsing)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude training, user-initiated browsing, search)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Gemini / AI Overviews)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Apple (Apple Intelligence)
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon (Alexa)
+User-agent: Amazonbot
+Allow: /
+
+# Bytespider (ByteDance)
+User-agent: Bytespider
+Allow: /

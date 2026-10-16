@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { products, type ProductStatus } from '../data/products';
+import LifecycleLoop from '../components/diagrams/LifecycleLoop.astro';
+
+const live = products.filter((p) => p.status === 'Live');
+const pipeline = products.filter((p) => p.status !== 'Live');
+
+const statusStyles: Record<ProductStatus, string> = {
+  Live: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300',
+  'In development': 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300',
+  'Coming soon': 'bg-zinc-200/70 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
+};
+---
+
+<BaseLayout title="Products — Md Abdullahil Shafi" description="Products I'm building and operating end to end — MyDokan today, more in the pipeline.">
+  <article>
+    <header>
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">Products</h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+        Beyond employment, I build and operate my own products — owning the complete lifecycle
+        from customer problem to product decision, implementation, delivery and support.
+      </p>
+    </header>
+
+    <!-- Live products -->
+    {
+      live.map((product) => (
+        <section class="mt-10">
+          <div class="rounded-2xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-900">
+            <div class="flex flex-wrap items-center gap-2">
+              <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">{product.name}</h2>
+              <span class={`rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[product.status]}`}>
+                {product.status}
+              </span>
+              {product.note && (
+                <span class="rounded-full bg-zinc-200/70 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                  {product.note}
+                </span>
+              )}
+            </div>
+            <p class="mt-1 text-sm font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">
+              {product.role}
+            </p>
+            <p class="mt-4 max-w-3xl text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+              {product.tagline}
+            </p>
+            <p class="mt-3 max-w-3xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {product.description}
+            </p>
+
+            {product.ownership && (
+              <div class="mt-6">
+                <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                  Complete lifecycle ownership
+                </h3>
+                <ul class="mt-3 space-y-2">
+                  {product.ownership.map((area) => (
+                    <li class="flex gap-2 leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      <span class="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-blue-500 dark:bg-blue-400" aria-hidden="true" />
+                      {area}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {product.tech && (
+              <div class="mt-6 flex flex-wrap items-center gap-1.5">
+                {product.tech.map((tech) => (
+                  <span class="rounded-full bg-zinc-200/70 px-2.5 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div class="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                The whole loop
+              </h3>
+              <div class="mt-4">
+                <LifecycleLoop />
+              </div>
+            </div>
+          </div>
+        </section>
+      ))
+    }
+
+    <!-- Pipeline -->
+    <section class="mt-12">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">In the pipeline</h2>
+      {
+        pipeline.length > 0 ? (
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            {pipeline.map((product) => (
+              <div class="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+                <div class="flex items-start justify-between gap-3">
+                  <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{product.name}</h3>
+                  <span class={`rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[product.status]}`}>
+                    {product.status}
+                  </span>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{product.tagline}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="mt-4 rounded-xl border border-dashed border-zinc-300 p-6 text-center text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+            New products are in the pipeline — they'll show up here when they're ready to talk about.
+          </p>
+        )
+      }
+    </section>
+  </article>
+</BaseLayout>

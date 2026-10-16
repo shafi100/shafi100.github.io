@@ -1,0 +1,67 @@
+---
+// Reporting platform before/after (personal-website-plan.md §3.3).
+// Two pairs because the platform improved two different workflows.
+const pairs = [
+  {
+    side: 'Customer side',
+    before: ['Customer requests a report', 'engineer generates it', 'customer waits days'],
+    after: ['Customer generates the report themselves'],
+  },
+  {
+    side: 'Engineering side — template maintenance',
+    before: ['~half a day per change', 'multi-team collaboration', 'risky rollbacks'],
+    after: ['~2 minutes', 'one self-paced PR merge & deploy', 'rollback = one commit revert'],
+  },
+];
+
+const sideStats = [
+  { value: '20+ GB', label: 'streamed straight to S3 — no size ceiling' },
+  { value: 'up to ~2x', label: 'faster for some reports' },
+  { value: '~50%', label: 'infrastructure, without resource spikes' },
+];
+---
+
+<div>
+  <div class="grid gap-4 lg:grid-cols-2">
+    {
+      pairs.map((pair) => (
+        <div class="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+          <h3 class="text-sm font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-100">{pair.side}</h3>
+          <div class="mt-4 rounded-lg bg-zinc-100 p-3 dark:bg-zinc-800/60">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Before</span>
+            <p class="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-zinc-600 dark:text-zinc-400">
+              {pair.before.map((step, i) => (
+                <>
+                  {i > 0 && <span class="text-zinc-400 dark:text-zinc-500" aria-hidden="true">→</span>}
+                  <span>{step}</span>
+                </>
+              ))}
+            </p>
+          </div>
+          <div class="mt-2 rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-3 dark:border-emerald-400/25 dark:bg-emerald-400/5">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">After</span>
+            <p class="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+              {pair.after.map((step, i) => (
+                <>
+                  {i > 0 && <span class="text-emerald-500/70 dark:text-emerald-400/70" aria-hidden="true">→</span>}
+                  <span>{step}</span>
+                </>
+              ))}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <dl class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+    {
+      sideStats.map((stat) => (
+        <div class="rounded-xl border border-zinc-200 p-4 text-center dark:border-zinc-800">
+          <dd class="text-xl font-bold text-blue-600 dark:text-blue-400">{stat.value}</dd>
+          <dt class="mt-1 text-xs leading-snug text-zinc-500 dark:text-zinc-400">{stat.label}</dt>
+        </div>
+      ))
+    }
+  </dl>
+</div>

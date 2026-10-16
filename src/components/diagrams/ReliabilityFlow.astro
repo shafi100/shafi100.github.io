@@ -1,0 +1,57 @@
+---
+// Reliability model (personal-website-plan.md §3.5): failure → backoff →
+// fairness → recovery, plus a concrete backoff curve.
+const chain = ['delivery fails', 'retry with exponential backoff', 'queues stay fair across tenants', 'message recovered'];
+
+// 1s → 16s across five retries
+const points = [
+  { x: 90, y: 162, label: '1s' },
+  { x: 195, y: 154, label: '2s' },
+  { x: 300, y: 137, label: '4s' },
+  { x: 405, y: 105, label: '8s' },
+  { x: 510, y: 40, label: '16s' },
+];
+const polyline = points.map((p) => `${p.x},${p.y}`).join(' ');
+---
+
+<div>
+  <p class="flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm">
+    {
+      chain.map((step, i) => (
+        <>
+          {i > 0 && <span class="text-zinc-400 dark:text-zinc-500" aria-hidden="true">→</span>}
+          <span class="rounded-lg bg-zinc-100 px-3 py-1.5 font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{step}</span>
+        </>
+      ))
+    }
+  </p>
+
+  <svg
+    viewBox="0 0 600 215"
+    class="mt-4 w-full text-zinc-400"
+    role="img"
+    aria-label="Chart of retry delays growing exponentially across five attempts: 1 second, 2 seconds, 4 seconds, 8 seconds, 16 seconds."
+  >
+    <title>Exponential backoff: delay doubles with each retry</title>
+    <line x1="50" y1="170" x2="560" y2="170" class="stroke-zinc-300 dark:stroke-zinc-700" stroke-width="1.5" />
+    <line x1="50" y1="170" x2="50" y2="20" class="stroke-zinc-300 dark:stroke-zinc-700" stroke-width="1.5" />
+    <polyline
+      points={polyline}
+      fill="none"
+      class="stroke-blue-500 dark:stroke-blue-400"
+      stroke-width="2.5"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    />
+    {points.map((p) => <circle cx={p.x} cy={p.y} r="4.5" class="fill-blue-500 stroke-white dark:stroke-zinc-950" stroke-width="2" />)}
+    {points.map((p) => <text x={p.x} y={p.y - 10} text-anchor="middle" class="fill-zinc-500 text-[11px] dark:fill-zinc-400">{p.label}</text>)}
+    {[1, 2, 3, 4, 5].map((n) => (
+      <text x={90 + (n - 1) * 105} y="190" text-anchor="middle" class="fill-zinc-400 text-[10px] dark:fill-zinc-500">{`retry ${n}`}</text>
+    ))}
+    <text x="305" y="208" text-anchor="middle" class="fill-zinc-500 text-[11px] dark:fill-zinc-400">delay doubles each retry — failing fast, backing off, recovering</text>
+  </svg>
+
+  <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+    Result: ~60% fewer event-processing failures.
+  </p>
+</div>

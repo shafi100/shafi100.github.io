@@ -1,0 +1,51 @@
+---
+// Lighthouse rings (personal-website-plan.md §3.7). Score is 100/100 in all
+// four categories, so each ring is a complete circle.
+const categories = [
+  { name: 'Performance', id: 'perf' },
+  { name: 'Accessibility', id: 'a11y' },
+  { name: 'Best Practices', id: 'bp' },
+  { name: 'SEO', id: 'seo' },
+];
+
+const radius = 50;
+const circumference = (2 * Math.PI * radius).toFixed(2);
+---
+
+<div>
+  <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+    {
+      categories.map((category) => (
+        <div class="flex flex-col items-center">
+          <svg
+            viewBox="0 0 120 120"
+            class="h-28 w-28 text-emerald-500"
+            role="img"
+            aria-label={`Lighthouse ${category.name}: 100 out of 100`}
+          >
+            <title>{`Lighthouse ${category.name}: 100/100`}</title>
+            <circle cx="60" cy="60" r={radius} fill="none" stroke="currentColor" stroke-opacity="0.15" stroke-width="10" />
+            <circle
+              cx="60"
+              cy="60"
+              r={radius}
+              fill="none"
+              stroke="currentColor"
+              stroke-width="10"
+              stroke-linecap="round"
+              stroke-dasharray={`${circumference} ${circumference}`}
+              transform="rotate(-90 60 60)"
+            />
+            <text x="60" y="69" text-anchor="middle" class="fill-current text-[28px] font-bold">100</text>
+          </svg>
+          <span class="mt-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">{category.name}</span>
+        </div>
+      ))
+    }
+  </div>
+  <p class="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+    Met a COO's challenge for a perfect score at Japan Travel by building custom dependency
+    tree-shaking tooling instead of optimizing by hand. This site is built the same way —
+    static HTML, system fonts, no trackers.
+  </p>
+</div>

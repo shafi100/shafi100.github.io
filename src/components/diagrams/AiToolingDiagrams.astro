@@ -1,0 +1,51 @@
+---
+// loop & portfolio at a glance (personal-website-plan.md §3.10).
+const tools = [
+  {
+    name: 'loop',
+    tagline: 'AI agents that review and run work through structure, not vibes.',
+    steps: ['Rooms with LLM personas', 'Approval gates', 'Deterministic YAML pipeline', 'Full audit trail'],
+    docs: 'https://shafi-.github.io/loop/',
+    repo: 'https://github.com/shafi-/loop',
+  },
+  {
+    name: 'portfolio',
+    tagline: 'Persistent context memory so an agent knows your whole ecosystem.',
+    steps: ['Every local repo, indexed', 'portfolio MCP server', 'An agent that can discuss all of them'],
+    docs: 'https://shafi-.github.io/portfolio/',
+    repo: 'https://github.com/shafi-/portfolio',
+  },
+];
+---
+
+<div class="grid gap-4 lg:grid-cols-2">
+  {
+    tools.map((tool) => (
+      <div class="flex flex-col rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+        <div class="flex items-center gap-2">
+          <h3 class="font-mono text-lg font-bold text-zinc-900 dark:text-zinc-100">{tool.name}</h3>
+          <span class="rounded-full bg-zinc-200/70 px-2 py-0.5 text-[11px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">open source</span>
+        </div>
+        <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{tool.tagline}</p>
+        <p class="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm" role="list">
+          {tool.steps.map((step, i) => (
+            <>
+              {i > 0 && <span class="text-zinc-400 dark:text-zinc-500" aria-hidden="true">→</span>}
+              <span role="listitem" class="rounded-lg bg-blue-500/10 px-2.5 py-1 text-xs font-medium text-blue-700 dark:bg-blue-400/10 dark:text-blue-300">
+                {step}
+              </span>
+            </>
+          ))}
+        </p>
+        <div class="mt-auto flex gap-4 pt-4 text-sm font-medium">
+          <a href={tool.docs} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">
+            Documentation ↗
+          </a>
+          <a href={tool.repo} target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-900 hover:underline dark:text-zinc-400 dark:hover:text-zinc-100">
+            Source ↗
+          </a>
+        </div>
+      </div>
+    ))
+  }
+</div>

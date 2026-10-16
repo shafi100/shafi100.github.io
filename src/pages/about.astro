@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config';
+import { experience, education } from '../data/experience';
+import { highlights } from '../data/highlights';
+import { caseStudySlugs } from '../data/caseStudies';
+import CareerTimeline from '../components/CareerTimeline.astro';
+import SkillsMap from '../components/SkillsMap.astro';
+import LighthouseRings from '../components/diagrams/LighthouseRings.astro';
+
+const interests = [
+  'SaaS product engineering',
+  'Backend & platform engineering',
+  'Distributed systems',
+  'Event-driven architecture',
+  'Micro-frontends',
+  'Data ingestion platforms',
+  'Reliability & performance',
+  'Developer experience',
+  'LLMs & AI agents',
+];
+
+const philosophy = [
+  {
+    title: 'Engineering leverage',
+    body: 'The best engineering investment is often not a customer-facing feature. Reusable libraries, automation, internal platforms and better developer workflows multiply the effectiveness of an entire organization.',
+  },
+  {
+    title: 'Pragmatic architecture',
+    body: 'Architecture should solve the actual problem and leave room for future evolution — never add distributed complexity simply because a system can support it.',
+  },
+  {
+    title: 'Operational ownership',
+    body: 'A system is not finished when it is deployed. Monitoring, debugging, failure recovery, cost management, security and maintenance are part of the job.',
+  },
+  {
+    title: 'Developer experience',
+    body: 'Engineers should not repeatedly solve the same integration problem. If a problem appears often enough, it is a candidate for a library, a platform, automation or better tooling.',
+  },
+];
+
+// ASCII diagram: platform systems designed & owned at TestReach (pure ASCII, monospace-safe)
+const platformDiagram = [
+  '+------------------------------------+',
+  '|  microservices (Node/TypeScript)   |',
+  '+------------------+-----------------+',
+  '                   |   type-safe ingestion library',
+  '                   |   (designed for engineers)',
+  '                   v',
+  '+------------------------------------+',
+  '|  SQS event queues                  |',
+  '|  retries / backoff / fairness      |',
+  '|  ~60% fewer processing failures    |',
+  '+------------------+-----------------+',
+  '                   v',
+  '+------------------------------------+',
+  '|  DataLake                          |',
+  '|  ~2-2.5M ingestion events / day    |',
+  '+------------------+-----------------+',
+  '                   v',
+  '+------------------------------------+     +--------------+',
+  '|  self-service reporting            |<----|  customers   |',
+  '|  templates ship in ~2 min, 20+ GB  |     +--------------+',
+  '|  streamed to S3, ~half the infra   |     self-serve, no',
+  '+------------------------------------+     engineering queue',
+];
+---
+
+<BaseLayout title="About — Md Abdullahil Shafi" description="Senior software engineer and technical leader with about ten years building SaaS products, cloud-native backend systems, distributed platforms and engineering tooling.">
+  <article>
+    <header>
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">About me</h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+        Software engineer and technical leader with <strong>about ten years of experience building
+        SaaS and web products</strong> — nine full-time, plus a part-time start while finishing
+        university. Primarily backend, platform and distributed systems, but I have worked across
+        the full stack throughout my career.
+      </p>
+      <p class="mt-4 max-w-2xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+        I have repeatedly taken ownership beyond a narrowly defined engineering role: designing
+        architecture, leading implementation, mentoring engineers, working directly with customers
+        and stakeholders, improving developer experience, recovering troubled projects, and owning
+        products from idea through maintenance.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        {
+          interests.map((interest) => (
+            <span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-400/10 dark:text-blue-300">
+              {interest}
+            </span>
+          ))
+        }
+      </div>
+    </header>
+
+    <!-- Career arc -->
+    <section class="mt-14">
+      <CareerTimeline />
+    </section>
+
+    <!-- Career highlights -->
+    <section id="highlights" class="mt-14 scroll-mt-24">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Career highlights</h2>
+      <div class="mt-6 space-y-6">
+        {
+          highlights.map((highlight) => (
+            <article id={highlight.slug} class="scroll-mt-24 rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+              <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{highlight.title}</h3>
+              <p class="mt-2 leading-relaxed text-zinc-600 dark:text-zinc-400">{highlight.context}</p>
+              <p class="mt-3 leading-relaxed text-zinc-600 dark:text-zinc-400">{highlight.outcome}</p>
+              <dl class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                {highlight.metrics.map((metric) => (
+                  <div>
+                    <dd class="text-lg font-bold text-blue-600 dark:text-blue-400">{metric.value}</dd>
+                    <dt class="text-xs text-zinc-500 dark:text-zinc-500">{metric.label}</dt>
+                  </div>
+                ))}
+              </dl>
+              {caseStudySlugs.has(highlight.slug) && (
+                <a
+                  href={`/work/${highlight.slug}/`}
+                  class="mt-4 inline-block text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+                >
+                  Read the full case study →
+                </a>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Platform systems diagram -->
+    <section class="mt-14">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">The systems I design &amp; own</h2>
+      <p class="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
+        A simplified view of how the platform systems I've designed and owned at TestReach fit
+        together — from service instrumentation up to customer self-service. The full stories live
+        in the <a href="/work/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">case studies</a>.
+      </p>
+      <pre class="mt-5 overflow-x-auto rounded-xl border border-zinc-200 bg-zinc-950 p-5 font-mono text-[11px] leading-relaxed text-zinc-300 sm:text-[13px] dark:border-zinc-800"><code>{platformDiagram.join('\n')}</code></pre>
+    </section>
+
+    <!-- Performance proof -->
+    <section class="mt-14">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Proof, not promises</h2>
+      <p class="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
+        The Lighthouse story from Japan Travel, 2020–2021:
+      </p>
+      <div class="mt-6 rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+        <LighthouseRings />
+      </div>
+    </section>
+
+    <!-- Experience timeline -->
+    <section class="mt-14">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Professional journey</h2>
+      <ol class="timeline mt-8 space-y-10 pl-8">
+        {
+          experience.map((job) => (
+            <li class="relative">
+              <span
+                class:list={[
+                  'absolute -left-8 top-1.5 h-4 w-4 rounded-full border-2',
+                  job.current
+                    ? 'border-blue-500 bg-blue-500 ring-4 ring-blue-500/20 dark:border-blue-400 dark:bg-blue-400'
+                    : 'border-zinc-400 bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-900',
+                ]}
+                aria-hidden="true"
+              />
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                  {job.role}
+                  <span class="font-normal text-zinc-500 dark:text-zinc-400">
+                    {' · '}
+                    {job.url ? (
+                      <a
+                        href={job.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-blue-600 hover:underline dark:text-blue-400"
+                      >
+                        {job.company}
+                      </a>
+                    ) : (
+                      job.company
+                    )}
+                  </span>
+                </h3>
+                <time class="text-sm text-zinc-500 dark:text-zinc-500">{job.period}</time>
+              </div>
+              <p class="mt-2 leading-relaxed text-zinc-600 dark:text-zinc-400">{job.summary}</p>
+              {job.highlights && (
+                <ul class="mt-3 space-y-1.5">
+                  {job.highlights.map((highlight) => (
+                    <li class="flex gap-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-blue-500 dark:bg-blue-400" aria-hidden="true" />
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {job.tech && (
+                <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
+                  <span class="font-medium text-zinc-600 dark:text-zinc-400">Stack:</span>{' '}
+                  {job.tech.join(' · ')}
+                </p>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="mt-14 scroll-mt-24">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Skills, grouped by depth</h2>
+      <p class="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
+        No percentage bars — depth is stated in words, with the context where each skill was
+        used. This is also how I answer the question honestly in interviews.
+      </p>
+      <div class="mt-6">
+        <SkillsMap />
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="mt-14">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Engineering philosophy</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          philosophy.map((principle) => (
+            <div class="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+              <h3 class="font-semibold text-zinc-900 dark:text-zinc-100">{principle.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{principle.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mt-14">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Education</h2>
+      <div class="mt-6">
+        {
+          education.map((ed) => (
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3 class="font-semibold text-zinc-900 dark:text-zinc-100">{ed.school}</h3>
+              <time class="text-sm text-zinc-500 dark:text-zinc-500">{ed.period}</time>
+            </div>
+          ))
+        }
+        <p class="mt-1 text-zinc-600 dark:text-zinc-400">
+          {education[0].degree}
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="mt-16 rounded-xl border border-blue-500/20 bg-blue-50 p-6 dark:border-blue-400/20 dark:bg-blue-950/40">
+      <h2 class="text-lg font-bold text-zinc-900 dark:text-zinc-100">Let's connect</h2>
+      <p class="mt-2 text-zinc-600 dark:text-zinc-400">
+        Open to senior/staff/lead engineering, platform architecture and technical-lead roles —
+        and always happy to talk founding-engineer or early-stage CTO journeys.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a
+          href={`mailto:${SITE.email}`}
+          class="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+        >
+          Email me
+        </a>
+        <a
+          href="/cv/"
+          class="rounded-lg border border-zinc-300 px-5 py-2.5 font-medium text-zinc-700 transition-colors hover:border-blue-600 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+        >
+          View résumé
+        </a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

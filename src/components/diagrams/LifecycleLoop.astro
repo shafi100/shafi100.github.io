@@ -1,0 +1,59 @@
+---
+// MyDokan product lifecycle loop (personal-website-plan.md §3.9).
+// Six nodes on a circle; the loop closes back to the users.
+const nodes = [
+  { x: 180, y: 60, lines: ['Talk to', 'users'] },
+  { x: 284, y: 120, lines: ['Prioritize'] },
+  { x: 284, y: 240, lines: ['Design'] },
+  { x: 180, y: 300, lines: ['Build'] },
+  { x: 76, y: 240, lines: ['Deploy'] },
+  { x: 76, y: 120, lines: ['Support &', 'market'] },
+];
+
+// arc segments between consecutive nodes, clockwise, trimmed to clear the node circles
+const arcs = [
+  'M221 67 A 120 120 0 0 1 298 159',
+  'M298 159 A 120 120 0 0 1 298 201',
+  'M257 272 A 120 120 0 0 1 221 293',
+  'M139 293 A 120 120 0 0 1 103 272',
+  'M62 201 A 120 120 0 0 1 62 159',
+  'M103 88 A 120 120 0 0 1 139 67',
+];
+---
+
+<svg
+  viewBox="0 0 360 360"
+  class="mx-auto w-full max-w-md text-zinc-400"
+  role="img"
+  aria-label="MyDokan lifecycle: talk to users, prioritize, design, build, deploy, support and market — then back to the users. One person owns the whole loop."
+>
+  <title>The MyDokan product lifecycle loop</title>
+  <defs>
+    <marker id="lc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+    </marker>
+  </defs>
+
+  {arcs.map((d) => <path d={d} fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#lc-arrow)" />)}
+
+  {
+    nodes.map((node) => (
+      <g>
+        <circle cx={node.x} cy={node.y} r="36" class="fill-white stroke-zinc-300 dark:fill-zinc-900 dark:stroke-zinc-700" stroke-width="1.5" />
+        {node.lines.map((textLine, i) => (
+          <text
+            x={node.x}
+            y={node.y + 4 + (i - (node.lines.length - 1) / 2) * 14}
+            text-anchor="middle"
+            class="fill-zinc-700 text-[11px] font-medium dark:fill-zinc-300"
+          >
+            {textLine}
+          </text>
+        ))}
+      </g>
+    ))
+  }
+
+  <text x="180" y="176" text-anchor="middle" class="fill-zinc-900 text-[13px] font-bold dark:fill-zinc-100">MyDokan</text>
+  <text x="180" y="193" text-anchor="middle" class="fill-zinc-500 text-[10px] dark:fill-zinc-400">one person, whole loop</text>
+</svg>
