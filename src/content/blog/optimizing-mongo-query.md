@@ -39,10 +39,10 @@ Another potential optimization was to place both the database and server within 
 Here’s a snapshot of the API response times before and after our changes:
 
 API Response Times Before Optimization:
-![api-response-time-before](/images/before-optimization.png)
+<img src="/images/before-optimization.webp" alt="API response times before optimization" width="1852" height="728" loading="lazy" decoding="async" />
 
 API Response Times After Optimization:
-![api-response-time-after](/images/after-optimization.png)
+<img src="/images/after-optimization.webp" alt="API response times after optimization" width="1852" height="794" loading="lazy" decoding="async" />
 
 As you can see, we successfully hit our target of under 3 seconds.
 

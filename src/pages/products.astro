@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config';
 import { products, type ProductStatus } from '../data/products';
+import { projects } from '../data/projects';
 import LifecycleLoop from '../components/diagrams/LifecycleLoop.astro';
+import AiToolingDiagrams from '../components/diagrams/AiToolingDiagrams.astro';
 
 const live = products.filter((p) => p.status === 'Live');
 const pipeline = products.filter((p) => p.status !== 'Live');
@@ -11,19 +14,26 @@ const statusStyles: Record<ProductStatus, string> = {
   'In development': 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300',
   'Coming soon': 'bg-zinc-200/70 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
 };
+
+// loop & portfolio are presented in the AI-tooling narrative below, so they
+// don't repeat in the smaller open-source list.
+const openSource = projects.filter(
+  (p) => p.category === 'Open Source' && p.name !== 'loop' && p.name !== 'portfolio'
+);
+const clientWork = projects.filter((p) => p.category === 'Professional');
 ---
 
-<BaseLayout title="Products — Md Abdullahil Shafi" description="Products I'm building and operating end to end — MyDokan today, more in the pipeline.">
+<BaseLayout title="Products — Md Abdullahil Shafi" description="Things I've shipped — my own product, the AI tooling I build with, open source, and selected client platform work. Each with its status and how to get it.">
   <article>
     <header>
-      <h1 class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">Products</h1>
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">Shipped</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-        Beyond employment, I build and operate my own products — owning the complete lifecycle
-        from customer problem to product decision, implementation, delivery and support.
+        Things I've built and operate — my own product, the AI tooling I build with, open source
+        and selected client platform work. Each with its status and how to get it.
       </p>
     </header>
 
-    <!-- Live products -->
+    <!-- My own product -->
     {
       live.map((product) => (
         <section class="mt-10">
@@ -51,7 +61,7 @@ const statusStyles: Record<ProductStatus, string> = {
 
             {product.ownership && (
               <div class="mt-6">
-                <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
                   Complete lifecycle ownership
                 </h3>
                 <ul class="mt-3 space-y-2">
@@ -75,8 +85,18 @@ const statusStyles: Record<ProductStatus, string> = {
               </div>
             )}
 
+            <div class="mt-8 flex flex-wrap items-center gap-3 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+              <a
+                href={`mailto:${SITE.email}?subject=MyDokan%20access`}
+                class="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500"
+              >
+                Email me for access
+              </a>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400">Distributed privately — happy to walk you through it.</p>
+            </div>
+
             <div class="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
-              <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
                 The whole loop
               </h3>
               <div class="mt-4">
@@ -87,6 +107,28 @@ const statusStyles: Record<ProductStatus, string> = {
         </section>
       ))
     }
+
+    <!-- How I build with AI agents -->
+    <section class="mt-12">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">How I build with AI agents</h2>
+      <p class="mt-2 max-w-3xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+        AI agents are part of my daily workflow — and when the tooling didn't exist, I built it.
+        <a href="https://github.com/shafi-/loop" target="_blank" rel="noopener noreferrer" class="font-medium text-blue-600 hover:underline dark:text-blue-400">loop</a>
+        is a harness engine that runs work through discussion rooms with LLM personas, approval
+        gates and a deterministic pipeline.{" "}
+        <a href="https://github.com/shafi-/portfolio" target="_blank" rel="noopener noreferrer" class="font-medium text-blue-600 hover:underline dark:text-blue-400">portfolio</a>
+        is an MCP server that gives any agent a persistent memory of my whole project ecosystem —
+        <a href="/tools/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">27 tools</a> covering
+        structure, dependencies, features and architecture across every local repository.
+      </p>
+      <div class="mt-6">
+        <AiToolingDiagrams />
+      </div>
+      <p class="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
+        Full inventory and the interactive Jest Error Viewer live on the{" "}
+        <a href="/tools/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">Tools page</a>.
+      </p>
+    </section>
 
     <!-- Pipeline -->
     <section class="mt-12">
@@ -107,11 +149,73 @@ const statusStyles: Record<ProductStatus, string> = {
             ))}
           </div>
         ) : (
-          <p class="mt-4 rounded-xl border border-dashed border-zinc-300 p-6 text-center text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+          <p class="mt-4 rounded-xl border border-dashed border-zinc-300 p-6 text-center text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
             New products are in the pipeline — they'll show up here when they're ready to talk about.
           </p>
         )
       }
+    </section>
+
+    <!-- Open source -->
+    <section class="mt-12">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Open source</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          openSource.map((project) => (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group rounded-xl border border-zinc-200 bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-blue-500/50 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-blue-400/50"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="text-lg font-semibold text-zinc-900 group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
+                  {project.name}
+                </h3>
+                {project.note && (
+                  <span class="rounded-full bg-zinc-200/70 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                    {project.note}
+                  </span>
+                )}
+              </div>
+              <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{project.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Client & platform work -->
+    <section class="mt-12">
+      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">Client &amp; platform work</h2>
+      <p class="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
+        Shipped for employers — the platform stories behind TestReach are told in the{" "}
+        <a href="/work/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">case studies</a>.
+      </p>
+      <ul class="mt-6 divide-y divide-zinc-200 rounded-xl border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
+        {
+          clientWork.map((project) => (
+            <li>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex flex-col gap-2 p-5 transition-colors hover:bg-zinc-50 sm:flex-row sm:items-center sm:justify-between sm:gap-6 dark:hover:bg-zinc-800/50"
+              >
+                <div>
+                  <h3 class="font-semibold text-zinc-900 group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
+                    {project.name}
+                  </h3>
+                  <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{project.description}</p>
+                </div>
+                <p class="shrink-0 text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+                  {project.role}
+                </p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </article>
 </BaseLayout>

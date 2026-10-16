@@ -148,6 +148,7 @@ export async function GET({ site }) {
 
   line('## Contact');
   line();
+  line(`- Status: ${SITE.availability}`);
   line(`- Email: ${SITE.email}`);
   SOCIALS.filter((s) => s.url.startsWith('http')).forEach((s) => line(`- ${s.label}: ${s.url}`));
   line();

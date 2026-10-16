@@ -6,6 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://shafi.me',
   integrations: [sitemap()],
+  redirects: {
+    '/projects': '/products/',
+  },
   markdown: {
     shikiConfig: {
       themes: {

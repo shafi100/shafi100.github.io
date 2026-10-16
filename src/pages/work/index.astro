@@ -28,7 +28,7 @@ import { caseStudies } from '../../data/caseStudies';
               <h2 class="text-lg font-semibold text-zinc-900 group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
                 {study.title}
               </h2>
-              <span class="font-mono text-xs text-zinc-500 dark:text-zinc-500">
+              <span class="font-mono text-xs text-zinc-600 dark:text-zinc-400">
                 {study.company} · {study.period}
               </span>
             </div>
@@ -37,7 +37,7 @@ import { caseStudies } from '../../data/caseStudies';
               {study.metrics.slice(0, 2).map((metric) => (
                 <span class="text-sm">
                   <strong class="text-blue-600 dark:text-blue-400">{metric.value}</strong>
-                  <span class="ml-1 text-zinc-500 dark:text-zinc-500">{metric.label}</span>
+                  <span class="ml-1 text-zinc-600 dark:text-zinc-400">{metric.label}</span>
                 </span>
               ))}
             </div>

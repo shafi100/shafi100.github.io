@@ -39,6 +39,27 @@ pre {
   line-height: 1.7;
 }
 
+/* apply the dark palette under .dark (shiki emits both themes as CSS vars) */
+.dark pre.astro-code,
+.dark pre.astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* github-light's #E36209 token fails 4.5:1 on the white code background — darken it */
+html:not(.dark) pre.astro-code span[style*="color:#E36209"] {
+  color: #9a5300 !important;
+}
+
+/* the comment gray #6A737D is shared by both palettes but fails 4.5:1 on
+   shiki's #24292e dark background — use github's newer dark comment color */
+.dark pre.astro-code span[style*="color:#6A737D"] {
+  color: #8b949e !important;
+}
+
 /* timeline */
 .timeline {
   position: relative;

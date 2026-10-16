@@ -18,4 +18,4 @@ from
     ) as nv (id, currency)
 where account.id = nv.id ;
 ```
-Credit goes to [here](https://dba.stackexchange.com/a/246759/81095).
+Credit goes to [this dba.stackexchange.com answer](https://dba.stackexchange.com/a/246759/81095).

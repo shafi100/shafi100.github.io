@@ -51,7 +51,7 @@ const stops = [
       [...stops].reverse().map((stop) => (
         <li class:list={['stop relative', stop.current && 'is-current']}>
           <span class="dot absolute h-3 w-3 rounded-full" aria-hidden="true" />
-          <time class="block font-mono text-xs text-zinc-500 dark:text-zinc-400">{stop.period}</time>
+          <time class="block font-mono text-xs text-zinc-600 dark:text-zinc-400">{stop.period}</time>
           <h3 class="mt-2 font-semibold text-zinc-900 dark:text-zinc-100">{stop.place}</h3>
           <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{stop.detail}</p>
           <p class="mt-2 text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
@@ -61,9 +61,11 @@ const stops = [
       ))
     }
   </ol>
-  <p class="mt-6 text-sm text-zinc-500 dark:text-zinc-500">
+  <p class="mt-6 text-sm text-zinc-600 dark:text-zinc-400">
     MyDokan, my own product, runs in parallel as an independent track — see{" "}
     <a href="/products/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">Products</a>.
+    Role-by-role detail, stacks and achievements live on the{" "}
+    <a href="/cv/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">CV</a>.
   </p>
 </section>
 

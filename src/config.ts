@@ -8,14 +8,17 @@ export const SITE = {
   email: 'shafi.cse.buet@gmail.com',
   role: 'Senior Software Engineer',
   specializations: ['SaaS', 'Platform Engineering', 'Distributed Systems', 'Technical Leadership', 'Full Stack'],
+  /** short status line for the homepage hero and CV header */
+  availability:
+    'Open to senior/staff/lead engineering, platform and technical-lead roles — happy to talk founding-engineer journeys',
 } as const;
 
 export const NAV = [
-  { label: 'About', href: '/about/' },
-  { label: 'Projects', href: '/projects/' },
+  { label: 'Work', href: '/work/' },
   { label: 'Products', href: '/products/' },
+  { label: 'About', href: '/about/' },
   { label: 'Blog', href: '/blog/' },
-  { label: 'Tools', href: '/tools/' },
+  { label: 'CV', href: '/cv/' },
 ] as const;
 
 export interface Social {

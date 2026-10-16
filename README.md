@@ -32,20 +32,26 @@ tags: [Tag1, Tag2]
 Body in markdown.
 ```
 
-**Projects** — `src/data/projects.ts`
+**Projects** — `src/data/projects.ts` (feeds the Products page: open-source list + client & platform work; there is no /projects/ page — it redirects here)
 **Products** — `src/data/products.ts` (add an object with `status: 'In development' | 'Coming soon'` to surface it in the pipeline section)
-**Experience** — `src/data/experience.ts`
-**Skills (depth tiers)** — `src/data/skills.ts` (`Daily, deep → Strong → Working exposure → Growing`; `coreSkills` feeds the home-page chips)
-**Career highlights** — `src/data/highlights.ts`
+**Experience** — `src/data/experience.ts` (the CV page; About tells the arc via the timeline, not role-by-role)
+**Skills (depth tiers)** — `src/data/skills.ts` (`Daily, deep → Strong → Working exposure → Growing`; the homepage links to the map, `coreSkills` feeds the CV)
+**Career highlights** — `src/data/highlights.ts` (llms-full.txt and the homepage Lighthouse row)
 **Impact metrics** — `src/data/metrics.ts` (the strip, the résumé "Selected impact" and `metricsAsOf` — update the as-of date when numbers change)
-**Case studies** — `src/data/caseStudies.ts` (context → problem → what I did → result → what I'd do differently; each renders at `/work/<slug>/` with a diagram)
-**Site metadata & social links** — `src/config.ts`
+**Case studies** — `src/data/caseStudies.ts` (context → problem → what I did → result → what I'd do differently; each renders at `/work/<slug>/` with a diagram; the only full telling of each story — home shows one-line rows, About links here)
+**Site metadata, nav & availability line** — `src/config.ts`
 **Diagrams** — `src/components/diagrams/` (inline SVG/HTML, each with a text equivalent; the About-page ASCII diagram lives in `src/pages/about.astro`)
-**Tools** — `src/pages/tools/`
+**Tools** — `src/pages/tools/` (full portfolio MCP inventory + Jest Error Viewer; the AI-tooling narrative lives on Products)
+
+The site is a proof funnel: the homepage triages in ~30s (status line, metric strip, five
+one-line proof rows, shipped/now, skills one-liner); `/work/`, `/products/` and `/cv/` carry the
+2–5-minute depth; blog and `llms-full.txt` are the long form. Nav is exactly
+Work · Products · About · Blog · CV.
 
 Content rules (from `personal-website-plan.md`): facts come from `master-cv-main.md`; keep metrics
 coarse and employer-safe; "DataLake", never the internal codename; the third-party reporting tool is
-described generically; attribution is "designed the architecture for / led the design of".
+described generically; attribution is "designed the architecture for / led the design of"; the
+report-template count is downstream evidence of the fast pipeline, never a standalone claim.
 
 ## LLM & AI discoverability
 
@@ -53,7 +59,7 @@ The site is designed to be readable by search engines and LLM-powered assistants
 
 - `public/robots.txt` — explicitly allows the major AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, …) and points at the sitemap.
 - `/llms.txt` — LLM-friendly site index ([llms.txt spec](https://llmstxt.org)), generated at build time from the same data modules as the pages.
-- `/llms-full.txt` — the complete site content (profile, highlights, case studies, experience, products, projects, skills, all blog posts) as plain markdown.
+- `/llms-full.txt` — the complete site content (profile, highlights, case studies, experience, products, projects, skills, tools, all blog posts) as plain markdown.
 - `/blog/<slug>.md` and `/work/<slug>.md` — raw markdown versions of every blog post and case study.
 - JSON-LD structured data — `Person` + `WebSite` schema on every page, `BlogPosting` on posts, `Article` on case studies.
 

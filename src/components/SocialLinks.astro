@@ -35,7 +35,7 @@ const paths: Record<Social['icon'], string> = {
           aria-label={social.label}
           target={social.url.startsWith('http') ? '_blank' : undefined}
           rel={social.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-          class="inline-flex rounded-lg p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+          class="inline-flex rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
         >
           <svg class={iconClass} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d={paths[social.icon]} />

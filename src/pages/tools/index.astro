@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { mcpToolGroups, mcpToolCount } from '../../data/tools';
-import AiToolingDiagrams from '../../components/diagrams/AiToolingDiagrams.astro';
 ---
 
 <BaseLayout title="Tools — Md Abdullahil Shafi" description="Tools made by me — the portfolio MCP toolset for AI agents and the Jest Error Viewer.">
@@ -30,7 +29,9 @@ import AiToolingDiagrams from '../../components/diagrams/AiToolingDiagrams.astro
         every local project — structure, dependencies, technologies, features, architecture
         analyses and the relationships between projects — and exposes it to any MCP-compatible
         agent. In daily use it tracks 120+ local projects and 140+ technologies, so when I ask an
-        agent about "the auth flow I used in the last three apps", it actually knows.
+        agent about "the auth flow I used in the last three apps", it actually knows. The story of
+        how I build with these tools is on the{" "}
+        <a href="/products/" class="font-medium text-blue-600 hover:underline dark:text-blue-400">Products page</a>.
       </p>
 
       <div class="mt-6 grid gap-4 sm:grid-cols-2">
@@ -58,7 +59,7 @@ import AiToolingDiagrams from '../../components/diagrams/AiToolingDiagrams.astro
           href="https://shafi-.github.io/portfolio/"
           target="_blank"
           rel="noopener noreferrer"
-          class="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+          class="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500"
         >
           Documentation
         </a>
@@ -70,16 +71,6 @@ import AiToolingDiagrams from '../../components/diagrams/AiToolingDiagrams.astro
         >
           Source on GitHub
         </a>
-      </div>
-    </section>
-
-    <!-- loop & portfolio at a glance -->
-    <section class="mt-6">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-        Built in the open, with AI agents
-      </h2>
-      <div class="mt-5">
-        <AiToolingDiagrams />
       </div>
     </section>
 
