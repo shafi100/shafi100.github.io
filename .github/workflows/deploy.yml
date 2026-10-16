@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Astro 7 requires Node >= 22.12; withastro/action defaults to Node 20
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
       # enables Pages on first deploy and switches the repo to Actions builds
       # (the legacy branch-based build served the old Jekyll site)
       - name: Configure Pages
@@ -28,6 +24,9 @@ jobs:
           enablement: true
       - name: Install, build, and upload site
         uses: withastro/action@v3
+        with:
+          # Astro 7 requires Node >= 22.12; the action defaults to Node 20
+          node-version: 22
 
   deploy:
     needs: build
