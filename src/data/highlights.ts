@@ -24,8 +24,8 @@ export const highlights: Highlight[] = [
     outcome:
       'The operational model changed from “customer requests report → engineer generates report → customer waits” to customers generating reports independently, according to their business agreements. Template maintenance dropped from half a day of multi-team collaboration to a ~2-minute automated pipeline — one self-paced PR merge, rollback is a one-commit revert — fast and reliable enough that the team has kept creating templates ever since (60+ today). Reports over 20 GB stream directly to S3, so there is no size ceiling; some reports generate up to ~2x faster than the previous third-party workflow; infrastructure allocation is roughly half of what it was, without the resource spikes.',
     metrics: [
-      { value: 'Days → self-serve', label: 'report delivery' },
-      { value: '½ day → ~2 min', label: 'template maintenance, via automation' },
+      { value: 'Self-serve', label: 'report delivery' },
+      { value: '~2 min', label: 'template change, down from ½ a day' },
       { value: '20+ GB', label: 'reports streamed straight to S3' },
       { value: '~2x', label: 'faster generation for some reports' },
     ],

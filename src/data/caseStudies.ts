@@ -84,8 +84,8 @@ export const caseStudies: CaseStudy[] = [
     result:
       'Customers generate their own reports according to their business agreements — no engineering queue, no days of waiting. Because template changes became fast and low-risk, the team has kept creating and expanding them — 60+ templates today, maintained through the ~2-minute pipeline instead of half-day cross-team efforts. Reports over 20 GB stream straight to S3 with no size ceiling, some generate up to ~2x faster than the previous workflow, and infrastructure allocation is roughly half of what it was, without the resource spikes the old system showed. The third-party BI tool remains only as a temporary fallback and is planned for discontinuation.',
     metrics: [
-      { value: 'Days → self-serve', label: 'report delivery — no engineering queue' },
-      { value: '½ day → ~2 min', label: 'template maintenance' },
+      { value: 'Self-serve', label: 'report delivery — no engineering queue' },
+      { value: '~2 min', label: 'template change, down from ½ a day' },
       { value: '20+ GB', label: 'reports streamed to S3, no size ceiling' },
       { value: '~50%', label: 'less infrastructure allocation' },
     ],
